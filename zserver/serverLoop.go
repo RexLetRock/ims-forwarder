@@ -77,11 +77,10 @@ func (s *ConnHandle) LoopToRead() {
 				logrus.Errorf("IMC Topic not found %v \n", aMsg[2])
 			}
 		case MessageEdit.Toa():
-			// gIPData.Set(GetIMCTopic(conn), s)
 			logrus.Warn("New topic %v", aMsg[2])
 			gIPData.Set(aMsg[2], s)
 		default:
-			s.chans <- msg
+			// s.chans <- msg
 		}
 	}
 }
