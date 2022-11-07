@@ -74,9 +74,10 @@ func (s *ConnHandle) LoopToRead() {
 			if cConn, ok := connector.(*ConnHandle); ok {
 				cConn.chans <- msg
 			} else {
-				logrus.Errorf("IMC Topic not found %v \n", aMsg[2])
+				logrus.Warnf("IMC Topic not found %v \n", aMsg[2])
 			}
 		case MessageTopic.Toa():
+			logrus.Warnf("New topic %+v %v", aMsg[1], aMsg[2])
 			gIPData.Set(aMsg[2], s)
 		default:
 			// s.chans <- msg
