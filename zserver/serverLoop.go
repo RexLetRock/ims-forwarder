@@ -70,6 +70,7 @@ func (s *ConnHandle) LoopToRead() {
 		// Happy handle msg
 		switch aMsg[1] {
 		case MessageBroadcast.Toa():
+			logrus.Warn("Broadcast to topic %+v %v ", aMsg, aMsg[2])
 			connector, _ := gIPData.Get(aMsg[2])
 			if cConn, ok := connector.(*ConnHandle); ok {
 				cConn.chans <- msg
