@@ -13,6 +13,7 @@ const ThreadPerConn = 5
 
 const cSendSize = 999
 const cChanSize = 10000
+const cBuffSize = 1024 * 1024
 const cTimeToFlush = time.Millisecond
 const cMsgPartsNum = 4
 
@@ -60,7 +61,7 @@ func ConnHandleCreate(conn net.Conn) *ConnHandle {
 	s := &ConnHandle{
 		chans:   make(chan []byte, cChanSize),
 		flush:   make(chan []byte),
-		buffer:  make([]byte, cChanSize),
+		buffer:  make([]byte, cBuffSize),
 		conn:    conn,
 		cntSent: 0,
 	}
