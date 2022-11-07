@@ -77,7 +77,7 @@ func (s *ConnHandle) LoopToRead() {
 				logrus.Warnf("IMC Topic not found %v \n", aMsg[2])
 			}
 		case MessageTopic.Toa():
-			logrus.Warnf("New topic %v %+v", aMsg[2], aMsg)
+			logrus.Warnf("New topic %v %+v \n", aMsg[2], aMsg)
 			gIPData.Set(aMsg[2], s)
 		default:
 			// s.chans <- msg
