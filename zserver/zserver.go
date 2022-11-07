@@ -7,8 +7,6 @@ import (
 	"time"
 
 	"ims-forwarder/util"
-
-	"github.com/sirupsen/logrus"
 )
 
 const ThreadPerConn = 5
@@ -67,8 +65,6 @@ func ConnHandleCreate(conn net.Conn) *ConnHandle {
 		cntSent: 0,
 	}
 	s.readerReq, s.writerReq = io.Pipe()
-	gIPData.Set(GetIMCTopic(conn), s)
-	logrus.Warn("New topic %v", GetIMCTopic(conn))
 
 	go s.LoopToFlush()
 	go s.LoopToWrite()

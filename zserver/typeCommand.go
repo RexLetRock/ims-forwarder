@@ -4,13 +4,14 @@ import "strconv"
 
 type Command int
 
-var commands = []string{"MessageNew", "MessageEdit", "NessageBroadcast"}
+var commands = []string{"MessageNew", "MessageEdit", "NessageBroadcast", "MessageTopic"}
 var commandsLen = Command(len(commands))
 
 const (
 	MessageNew Command = iota
 	MessageEdit
 	MessageBroadcast
+	MessageTopic
 )
 
 func (s Command) Toa() string {
