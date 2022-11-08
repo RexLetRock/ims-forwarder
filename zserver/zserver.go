@@ -14,7 +14,7 @@ const ThreadPerConn = 5
 const cSendSize = 999
 const cChanSize = 10000
 const cBuffSize = 1024 * 1024
-const cTimeToFlush = time.Millisecond
+const cTimeToFlush = 5 * time.Millisecond
 const cMsgPartsNum = 4
 
 var gIPData util.ConcurrentMap

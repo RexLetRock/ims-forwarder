@@ -37,14 +37,14 @@ func (s *ConnHandle) LoopToWrite() {
 			s.cntSent++
 			if s.cntSent >= cSendSize {
 				if len(s.slice) > 0 {
-					go s.conn.Write(s.slice)
+					s.conn.Write(s.slice)
 					s.slice = []byte{}
 					s.cntSent = 0
 				}
 			}
 		case <-s.flush:
 			if len(s.slice) > 0 {
-				go s.conn.Write(s.slice)
+				s.conn.Write(s.slice)
 				s.slice = []byte{}
 				s.cntSent = 0
 			}
