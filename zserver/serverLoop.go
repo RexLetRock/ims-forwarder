@@ -2,25 +2,11 @@ package zserver
 
 import (
 	"bufio"
-	"encoding/binary"
-	"net"
-	"strconv"
 	"strings"
 	"time"
 
 	"github.com/sirupsen/logrus"
 )
-
-const cDefaultIMCTopicPort = 2082
-
-func GetIMCTopic(conn net.Conn) string {
-	remoteAddr := conn.RemoteAddr().(*net.TCPAddr)
-	ip := binary.BigEndian.Uint32(remoteAddr.IP)
-	port := cDefaultIMCTopicPort
-	result := "imc." + strconv.FormatUint(uint64(ip), 10) + "." + strconv.FormatUint(uint64(port), 10)
-	logrus.Errorf("IMC Topic %v %v \n", binary.BigEndian.Uint32(remoteAddr.IP), result)
-	return result
-}
 
 func (s *ConnHandle) LoopToFlush() {
 	for {
@@ -61,7 +47,7 @@ func (s *ConnHandle) LoopToRead() {
 			continue
 		}
 
-		aMsg := strings.Split(string(msg), "|")
+		aMsg := strings.Split(string(msg), "|||")
 		if len(aMsg) < cMsgPartsNum {
 			logrus.Warnf("Msg wrong format %v", aMsg)
 			continue
