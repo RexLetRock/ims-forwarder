@@ -1,0 +1,2 @@
+build:
+	GOOS=linux CGO_ENABLED=1 go build -tags musl -o engine service/forwarder/cmd/*.go

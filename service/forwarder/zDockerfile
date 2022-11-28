@@ -1,0 +1,27 @@
+# Builder
+FROM golang:1.17-alpine as builder
+
+RUN apk update && apk upgrade && \
+    apk --update add git make gcc g++
+
+WORKDIR /app
+
+COPY . .
+
+RUN make -f Makefile.forwarder build
+
+# Distribution
+FROM alpine:3.12
+
+RUN apk update && apk upgrade && \
+    apk --update --no-cache add tzdata && \
+    mkdir /app && mkdir /app/etc
+
+WORKDIR /app
+
+EXPOSE 19000
+
+COPY --from=builder /app/engine /app
+COPY --from=builder /app/config/forwarder.yaml /app/etc
+
+CMD ["/bin/sh", "-c", "/app/engine --config /app/etc/forwarder.yaml >> /app/log/forwarder.log 2>&1"]

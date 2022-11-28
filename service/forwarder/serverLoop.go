@@ -1,4 +1,4 @@
-package zserver
+package forwarder
 
 import (
 	"bufio"
