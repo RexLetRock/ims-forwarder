@@ -15,7 +15,8 @@ build-forwarder:
 	GOOS=linux CGO_ENABLED=1 go build -tags musl -o engine service/forwarder/cmd/*.go
 
 docker-run:
-	docker run -d -p 19000:19000 ${APP_FORWARDER_IMAGE_DEV}
+	CGO_ENABLED=1 docker build -f service/forwarder/zDockerfile -t ${APP_FORWARDER_IMAGE}_local .
+	docker run -d -p 19000:19000 ${APP_FORWARDER_IMAGE}_local
 
 docker-build-forwarder:
 	CGO_ENABLED=1 docker build -f service/forwarder/zDockerfile -t ${APP_FORWARDER_IMAGE} .
